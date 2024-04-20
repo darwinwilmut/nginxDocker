@@ -75,3 +75,14 @@ certbot/certbot certonly \
 --preferred-challenges http \
 -d vm0112.westeurope.cloudapp.azure.com
 ```
+
+### Step 6: Run the nginx container
+Note: Make sure you update the command.
+```
+sudo docker run -d -p 80:80 -p 443:443 --name nginx \
+--network app-network \
+-v "/home/darwinwilmut/nginx/conf:/etc/nginx/conf.d" \
+-v "/etc/letsencrypt/live/vm0112.westeurope.cloudapp.azure.com:/etc/nginx/ssl" \
+-v "/etc/letsencrypt:/etc/letsencrypt" \
+nginx
+```
